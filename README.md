@@ -41,7 +41,7 @@ To automatically setup the switch device:
 ```
 {
     "name": "MAC",
-    "availability_topic": "homeassistant/cover/MACx/connection",
+    "availability_topic": "homeassistant/switch/MACx/connection",
     "payload_available": "Online",
     "payload_not_available": "Offline",
     "command_topic": "homeassistant/switch/MACx/set",
