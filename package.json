@@ -19,6 +19,14 @@
     "mqtt",
     "homeassistant"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/binsentsu/switchbot-ctrl"
+  },
+  "bugs": {
+    "url": "https://github.com/binsentsu/switchbot-ctrl"
+  },
+  "homepage": "https://github.com/binsentsu/switchbot-ctrl#readme",
   "engines": {
     "node": ">=7.0 <10.0"
   },
