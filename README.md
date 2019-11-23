@@ -54,6 +54,7 @@ To automatically setup the switch device:
         "manufacturer": "Switchbot"
     }
 }
+```
 
 ## Parameters
 
