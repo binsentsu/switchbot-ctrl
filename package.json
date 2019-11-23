@@ -1,0 +1,36 @@
+{
+  "name": "switchbot-ctrl",
+  "version": "0.0.1",
+  "description": "Control a switchbot by HTTP or MQTT",
+  "main": "index.js",
+  "bin": {
+    "switchbotctrl": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests currently\"",
+    "lint": "./node_modules/.bin/eslint index.js src/*.js"
+  },
+  "author": "binsentsu",
+  "license": "MIT",
+  "keywords": [
+    "switchbot",
+    "btle",
+    "bluetooth",
+    "mqtt",
+    "homeassistant"
+  ],
+  "engines": {
+    "node": ">=7.0 <10.0"
+  },
+  "dependencies": {
+    "debug": "^4.0.1",
+    "express": "^4.16.3",
+    "mqtt": "^2.18.2",
+    "noble": "^1.9.1",
+    "readline-sync": "^1.4.9",
+    "yargs": "^13.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.1.0"
+  }
+}
