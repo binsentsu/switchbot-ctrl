@@ -29,6 +29,7 @@ Base topic defaults to `homeassistant`, but may be configured with the `-topic` 
 
 # MQTT
 To issue commands:
+
 ON: `<baseTopic>/switch/<deviceID>/set` - message: 'ON'
 
 OFF: `<baseTopic>/switch/<deviceID>/set` - message: 'OFF'
