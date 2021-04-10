@@ -50,16 +50,19 @@ class MQTTConnector {
 
         device.log(`mqtt topic ${deviceTopic}`);
 
-        device.on('initPerformed', (data) => {
-            switchConfig.name = data.id;
-            switchConfig.device.name = data.id;
-            mqttClient.publish(`${deviceTopic}/config`, JSON.stringify(switchConfig), {retain: true});
-            mqttClient.publish(`${deviceTopic}/connection`, 'Online', {retain:true});
-        });
+        
 
-        mqttClient.on('connect', () => device.log('mqtt connected'));
+        mqttClient.on('connect', () => {
+        	switchConfig.name = device.getState().id;
+        	switchConfig.device.name = device.getState().id;
+        	mqttClient.publish(`${deviceTopic}/config`, JSON.stringify(switchConfig), {retain: true});
+            mqttClient.publish(`${deviceTopic}/connection`, 'Online', {retain:true});
+        	device.log('mqtt connected')
+        });
         mqttClient.on('end', () => device.log('mqtt ended'));
         mqttClient.on('error', (e) => device.log('mqtt error %o', e));
+        mqttClient.on('offline', () => device.log('mqtt offline'));
+        mqttClient.on('close', () => device.log('mqtt close'));
     }
 }
 
