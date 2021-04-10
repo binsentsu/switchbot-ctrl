@@ -1,6 +1,6 @@
 {
   "name": "switchbot-ctrl",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Control a switchbot by HTTP or MQTT",
   "main": "index.js",
   "bin": {
@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/binsentsu/switchbot-ctrl#readme",
   "engines": {
-    "node": ">=7.0 <10.0"
+    "node": ">=10.16.0 <13.0"
   },
   "dependencies": {
     "debug": "^4.0.1",
     "express": "^4.16.3",
     "mqtt": "^2.18.2",
-    "noble": "^1.9.1",
+    "@abandonware/noble": "^1.9.2-5",
     "readline-sync": "^1.4.9",
     "yargs": "^13.2.2"
   },
