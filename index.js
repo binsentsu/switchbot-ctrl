@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const readlineSync = require('readline-sync');
-const noble = require('noble');
+const noble = require('@abandonware/noble');
 const log = require('debug')('switchbot*');
 const debugLog = require('debug')('switchbot');
 const switchBot = require('./src/switchbot');
@@ -56,7 +56,7 @@ if (argv.p === true) {
     argv.p = readlineSync.question('MQTT Password: ', {hideEchoBack: true, mask: ''});
 }
 
-const idsToConnectTo = argv._.filter(name => !name.startsWith('_')).map(name => name.replace(/:/g, ''));
+const idsToConnectTo = argv._.filter(name => !name.startsWith('_')).map(name => name.replace(/:/g, '').toLowerCase());
 
 if(idsToConnectTo.length === 0)
 {
@@ -99,8 +99,10 @@ if (expressPort) {
     new WebBinding(devices, expressPort, debugLog);
 }
 
+noble.on('warning', (message) => {debugLog(message)});
+
 noble.on('discover', peripheral => {
-    let id = peripheral.address !== undefined ? peripheral.address.replace(/:/g, '') : undefined;
+    let id = peripheral.address !== undefined ? peripheral.address.replace(/:/g, '').toLowerCase() : undefined;
 
     if (idsToConnectTo.indexOf(id) === -1) {
         debugLog('Found %s but will not connect as it was not specified in the list of devices %o', id, idsToConnectTo);
@@ -114,13 +116,15 @@ noble.on('discover', peripheral => {
     if (Object.keys(devices).length === argv.expectedDevices) {
         log('all expected devices connected, stopping scan');
         noble.stopScanning();
+        
+        Object.values(devices).forEach((device) => {
+            if (mqttUrl) {
+                new mqttBinding(device, mqttUrl, baseTopic, mqttUsername, mqttPassword);
+            }
+        });
+   }
 
-        if (mqttUrl) {
-            new mqttBinding(devices[id], mqttUrl, baseTopic, mqttUsername, mqttPassword);
-        }
-
-        Object.values(devices).forEach((device) => {device.switchbotInit();});
-    }
+   
 
 
 });
